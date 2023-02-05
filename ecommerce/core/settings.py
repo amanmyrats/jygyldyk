@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'django.forms',
+
     'webapps',
     'webapps.offer',
     'webapps.search',
@@ -112,10 +114,15 @@ AUTHENTICATION_BACKENDS = (
 
 ROOT_URLCONF = 'core.urls'
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")  # ROOT dir for templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'),],
+        'DIRS': [
+            os.path.join(BASE_DIR,'templates'),
+            # os.path.join(BASE_DIR,django.__path__[0],'/forms/templates'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
