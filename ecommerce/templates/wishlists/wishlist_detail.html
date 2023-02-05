@@ -1,4 +1,4 @@
-{% extends "oscar/layout.html" %}
+{% extends "layout.html" %}
 
 {% load i18n product_tags %}
 
@@ -33,7 +33,7 @@
                             {% endif %}
                         {% endfor %}
                     </ol>
-                    {% include "oscar/partials/pagination.html" %}
+                    {% include "partials/pagination.html" %}
                 </div>
             </section>
         {% else %}

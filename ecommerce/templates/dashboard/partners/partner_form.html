@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load category_tags %}
 {% load i18n %}
 
@@ -22,6 +22,6 @@
 
 {% block dashboard_content %}
     <div class="card card-body">
-        {% include 'oscar/dashboard/partials/form.html' with form=form %}
+        {% include 'dashboard/partials/form.html' with form=form %}
     </div>
 {% endblock dashboard_content %}

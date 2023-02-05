@@ -1,4 +1,4 @@
-{% extends "oscar/customer/baseaccountpage.html" %}
+{% extends "customer/baseaccountpage.html" %}
 {% load i18n %}
 
 {% block tabcontent %}
@@ -13,7 +13,7 @@
     </ul>
 
     {% if notifications %}
-        {% include "oscar/partials/pagination.html" %}
+        {% include "partials/pagination.html" %}
 
         <form action="{% url 'customer:notifications-update' %}" method="post">
             {% csrf_token %}
@@ -59,7 +59,7 @@
             <button type="submit" class="btn btn-danger" name="action" value="delete" data-loading-text="{% trans 'Deleting...' %}">{% trans "Delete" %}</button>
         </form>
 
-        {% include "oscar/partials/pagination.html" %}
+        {% include "partials/pagination.html" %}
 
     {% else %}
         <p class="mt-3">{% trans "There are no notifications to display." %}</p>

@@ -4,7 +4,7 @@ from django import template
 from django.urls import Resolver404, resolve
 from django.utils.translation import gettext_lazy as _
 
-from oscar.core.loading import get_class, get_model
+from core.loading import get_class, get_model
 
 Site = get_model('sites', 'Site')
 CustomerHistoryManager = get_class('customer.history', 'CustomerHistoryManager')
@@ -12,7 +12,7 @@ CustomerHistoryManager = get_class('customer.history', 'CustomerHistoryManager')
 register = template.Library()
 
 
-@register.inclusion_tag('oscar/customer/history/recently_viewed_products.html',
+@register.inclusion_tag('customer/history/recently_viewed_products.html',
                         takes_context=True)
 def recently_viewed_products(context, current_product=None):
     """

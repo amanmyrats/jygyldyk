@@ -1,4 +1,4 @@
-{% extends "oscar/checkout/checkout.html" %}
+{% extends "checkout/checkout.html" %}
 
 {% load currency_filters %}
 {% load i18n %}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block checkout_nav %}
-    {% include 'oscar/checkout/nav.html' with step=2 %}
+    {% include 'checkout/nav.html' with step=2 %}
 {% endblock %}
 
 {% block checkout_title %}{% trans "Shipping method" %}{% endblock %}

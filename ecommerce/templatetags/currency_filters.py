@@ -15,7 +15,7 @@ def currency(value, currency=None):
     Format decimal value as currency
     """
     if currency is None:
-        currency = settings.OSCAR_DEFAULT_CURRENCY
+        currency = settings.DEFAULT_CURRENCY
 
     try:
         value = D(value)
@@ -23,13 +23,13 @@ def currency(value, currency=None):
         return ""
     # Using Babel's currency formatting
     # http://babel.pocoo.org/en/latest/api/numbers.html#babel.numbers.format_currency
-    OSCAR_CURRENCY_FORMAT = getattr(settings, 'OSCAR_CURRENCY_FORMAT', None)
+    CURRENCY_FORMAT = getattr(settings, 'CURRENCY_FORMAT', None)
     kwargs = {
         'currency': currency,
         'locale': to_locale(get_language() or settings.LANGUAGE_CODE)
     }
-    if isinstance(OSCAR_CURRENCY_FORMAT, dict):
-        kwargs.update(OSCAR_CURRENCY_FORMAT.get(currency, {}))
+    if isinstance(CURRENCY_FORMAT, dict):
+        kwargs.update(CURRENCY_FORMAT.get(currency, {}))
     else:
-        kwargs['format'] = OSCAR_CURRENCY_FORMAT
+        kwargs['format'] = CURRENCY_FORMAT
     return format_currency(value, **kwargs)

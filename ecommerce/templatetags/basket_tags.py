@@ -1,7 +1,7 @@
 from django import template
 from django.contrib.sessions.serializers import JSONSerializer
 
-from oscar.core.loading import get_class, get_model
+from core.loading import get_class, get_model
 
 AddToBasketForm = get_class('basket.forms', 'AddToBasketForm')
 SimpleAddToBasketForm = get_class('basket.forms', 'SimpleAddToBasketForm')

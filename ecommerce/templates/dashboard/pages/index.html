@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load dashboard_tags %}
 {% load i18n %}
 
@@ -32,7 +32,7 @@
     </div>
     <div class="card card-body">
         <form method="get" class="form-inline">
-            {% include "oscar/dashboard/partials/form_fields_inline.html" with form=form %}
+            {% include "dashboard/partials/form_fields_inline.html" with form=form %}
             <button type="submit" class="btn btn-primary mr-2" data-loading-text="{% trans 'Searching...' %}">
                 {% trans "Search" %}
             </button>
@@ -79,7 +79,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% include "oscar/dashboard/partials/pagination.html" %}
+            {% include "dashboard/partials/pagination.html" %}
         </form>
     {% else %}
         <table class="table table-striped table-bordered table-hover">

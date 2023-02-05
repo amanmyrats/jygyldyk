@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load currency_filters %}
 {% load i18n %}
 
@@ -35,7 +35,7 @@
     </div>
     <form method="post" class="card card-body form-stacked">
         {% csrf_token %}
-        {% include "oscar/dashboard/partials/form_fields.html" with form=form %}
+        {% include "dashboard/partials/form_fields.html" with form=form %}
         {% block form_actions %}
             <div class="form-actions">
                 <button class="btn btn-primary" type="submit">{% trans "Save" %}</button> {% trans "or" %}

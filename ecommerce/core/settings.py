@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os 
 
 from pathlib import Path
 
@@ -41,26 +42,50 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.flatpages',
 
-    'apps',
-    'apps.offer',
-    'apps.search',
-    'apps.customer',
-    'apps.address',
-    'apps.partner',
-    'apps.communication',
-    'apps.catalogue',
-    'apps.catalogue.reviews',
-    'apps.wishlists',
-    'apps.voucher',
-    'apps.basket',
-    'apps.checkout',
-    'apps.payment',
-    'apps.order',
-    'apps.shipping',
-    'apps.analytics',
+    'webapps',
+    'webapps.offer',
+    'webapps.search',
+    'webapps.customer',
+    'webapps.address',
+    'webapps.partner',
+    'webapps.communication',
+    'webapps.catalogue',
+    'webapps.catalogue.reviews',
+    'webapps.wishlists',
+    'webapps.voucher',
+    'webapps.basket',
+    'webapps.checkout',
+    'webapps.payment',
+    'webapps.order',
+    'webapps.shipping',
+    'webapps.analytics',
 
+    'webapps.dashboard',
+    'webapps.dashboard.catalogue',
+    'webapps.dashboard.communications',
+    'webapps.dashboard.offers',
+    'webapps.dashboard.orders',
+    'webapps.dashboard.pages',
+    'webapps.dashboard.partners',
+    'webapps.dashboard.ranges',
+    'webapps.dashboard.reports',
+    'webapps.dashboard.reviews',
+    'webapps.dashboard.shipping',
+    'webapps.dashboard.users',
+    'webapps.dashboard.vouchers',
+    
     'utils',
+
+    # # 3rd-party apps that oscar depends on
+    'widget_tweaks',
+    'haystack',
+    'treebeard',
+    'django_tables2',
+
+    'sorl.thumbnail',
+
 ]
 
 SITE_ID=1
@@ -74,14 +99,23 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'webapps.basket.middleware.BasketMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'webapps.customer.auth_backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +123,31 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'webapps.search.context_processors.search_form',
+                'webapps.checkout.context_processors.checkout',
+                'webapps.communication.notifications.context_processors.notifications',
+                'core.context_processors.metadata',
             ],
+            'libraries': {
+                'basket_tags':'templatetags.basket_tags',
+                'category_tags':'templatetags.category_tags',
+                'currency_filters':'templatetags.currency_filters',
+                'dashboard_tags':'templatetags.dashboard_tags',
+                'datetime_filters':'templatetags.datetime_filters',
+                'display_tags':'templatetags.display_tags',
+                'form_tags':'templatetags.form_tags',
+                'history_tags':'templatetags.history_tags',
+                'image_tags':'templatetags.image_tags',
+                'product_tags':'templatetags.product_tags',
+                'purchase_info_tags':'templatetags.purchase_info_tags',
+                'reviews_tags':'templatetags.reviews_tags',
+                'shipping_tags':'templatetags.shipping_tags',
+                'sorting_tags':'templatetags.sorting_tags',
+                'string_filters':'templatetags.string_filters',
+                'url_tags':'templatetags.url_tags',
+                'wishlist_tags':'templatetags.wishlist_tags',
+            }
         },
     },
 ]
@@ -145,9 +203,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / "static_files",
+]
 
-
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
 
 
 
@@ -360,7 +422,7 @@ DASHBOARD_NAVIGATION = [
         'url_name': 'dashboard:reports-index',
     },
 ]
-# DASHBOARD_DEFAULT_ACCESS_FUNCTION = 'apps.dashboard.nav.default_access_fn'  # noqa
+DASHBOARD_DEFAULT_ACCESS_FUNCTION = 'webapps.dashboard.nav.default_access_fn'  # noqa
 
 # Search facets
 SEARCH_FACETS = {
@@ -406,9 +468,9 @@ SAVE_SENT_EMAILS_TO_DB = True
 # Solr 6.x
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/sandbox',
-        'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores',
-        'INCLUDE_SPELLING': True,
+        # 'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        # 'URL': 'http://127.0.0.1:8983/solr/sandbox',
+        # 'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores',
+        # 'INCLUDE_SPELLING': True,
     },
 }

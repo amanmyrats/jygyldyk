@@ -3,7 +3,7 @@ import warnings
 from django import template
 from django.template.base import TextNode
 
-from oscar.utils.deprecation import RemovedInOscar32Warning
+from utils.deprecation import RemovedInOscar32Warning
 
 register = template.Library()
 

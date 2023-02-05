@@ -1,4 +1,4 @@
-{% extends "oscar/customer/baseaccountpage.html" %}
+{% extends "customer/baseaccountpage.html" %}
 {% load i18n %}
 
 {% block breadcrumbs %}
@@ -32,7 +32,7 @@
         {% if not wishlist %}
             <p>{% trans "What should your new wish list be called?" %}</p>
         {% endif %}
-        {% include "oscar/partials/form_fields.html" %}
+        {% include "partials/form_fields.html" %}
         {% if product %}
             <p>
                 {% blocktrans with title=product.get_title %}
@@ -47,7 +47,7 @@
                 {% trans "If you want to share your wishlist with others, you can add their email addresses below. The visibility must be set to shared in order for this to work." %}
             </small>
             {% for form in shared_emails_formset %}
-                {% include "oscar/partials/form_fields.html" with form=form %}
+                {% include "partials/form_fields.html" with form=form %}
             {% endfor %}
         </div>
         <div class="form-group">

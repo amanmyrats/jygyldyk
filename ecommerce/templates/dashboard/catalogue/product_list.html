@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load i18n %}
 {% load render_table from django_tables2 %}
 
@@ -34,7 +34,7 @@
         </div>
         <div class="card card-body">
             <form action="{% url 'dashboard:catalogue-product-create' %}" method="get" class="form-inline">
-                {% include "oscar/dashboard/partials/form_fields_inline.html" with form=productclass_form %}
+                {% include "dashboard/partials/form_fields_inline.html" with form=productclass_form %}
                 <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Submitting...' %}">
                     <i class="fas fa-plus-circle"></i> {% trans "New Product" %}
                 </button>
@@ -58,7 +58,7 @@
                     {% endif %}
                 {% endfor %}
 
-                {% include "oscar/dashboard/partials/form_fields_inline.html" with form=form %}
+                {% include "dashboard/partials/form_fields_inline.html" with form=form %}
                 <button type="submit" class="btn btn-primary" data-loading-text="{% trans 'Searching...' %}"><i class="fas fa-search"></i> {% trans "Search" %}</button>
             </form>
         </div>

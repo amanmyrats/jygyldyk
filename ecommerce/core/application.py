@@ -125,7 +125,7 @@ class OscarConfigMixin(object):
 
         See permissions_required decorator for details
         """
-        from oscar.views.decorators import permissions_required
+        from views.decorators import permissions_required
         permissions = self.get_permissions(pattern.name)
         if permissions:
             return permissions_required(permissions, login_url=self.login_url)

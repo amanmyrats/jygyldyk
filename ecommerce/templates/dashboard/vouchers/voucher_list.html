@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load currency_filters %}
 {% load sorting_tags %}
 {% load i18n %}
@@ -61,7 +61,7 @@
             </form>
 
             {# Search modal, if there are form errors the form is automatically openend #}
-            {% include "oscar/dashboard/partials/advanced_search_modal.html" with form=advanced_form style='horizontal' %}
+            {% include "dashboard/partials/advanced_search_modal.html" with form=advanced_form style='horizontal' %}
 
             {% if search_filters %}
             <div class="search-filter-list">
@@ -167,7 +167,7 @@
             {% endif %}
         </table>
     {% endblock voucher_table %}
-{% include "oscar/dashboard/partials/pagination.html" %}
+{% include "dashboard/partials/pagination.html" %}
 {% endblock dashboard_content %}
 
 {% block onbodyload %}
