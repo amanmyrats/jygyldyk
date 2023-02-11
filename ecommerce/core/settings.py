@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'rosetta',
+
     'django.forms',
 
     'webapps',
@@ -96,6 +98,7 @@ SITE_ID=1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,6 +133,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
 
                 'webapps.search.context_processors.search_form',
                 'webapps.checkout.context_processors.checkout',
@@ -195,7 +199,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tk'
 
 TIME_ZONE = 'UTC'
 
@@ -205,6 +209,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('tk', _('Turkmen')),
+    ('en-us', _('English')),
+    ('ru', _('Russian')),
+)
+
+LOCALE_PATHS = [
+    Path(BASE_DIR, 'locale'),
+]
+
+ROSETTA_EXCLUDE_PATHS = ['venv',]
+ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
+BING_APP_ID = None
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -220,7 +237,7 @@ MEDIA_ROOT = 'media'
 
 
 
-SHOP_NAME = 'Oscar'
+SHOP_NAME = 'Internet Söwda Nokady'
 SHOP_TAGLINE = ''
 HOMEPAGE = reverse_lazy('catalogue:index')
 
@@ -240,7 +257,7 @@ RECENTLY_VIEWED_COOKIE_SECURE = False
 RECENTLY_VIEWED_PRODUCTS = 20
 
 # Currency
-DEFAULT_CURRENCY = 'GBP'
+DEFAULT_CURRENCY = 'TMT'
 
 # Paths
 IMAGE_FOLDER = 'images/products/%Y/%m/'
@@ -251,9 +268,10 @@ DELETE_IMAGE_FILES = True
 MISSING_IMAGE_URL = 'image_not_found.jpg'
 
 # Address settings
+# REQUIRED_ADDRESS_FIELDS = ('first_name', 'last_name', 'line1',
+#                                  'line4', 'postcode', 'country')
 REQUIRED_ADDRESS_FIELDS = ('first_name', 'last_name', 'line1',
-                                 'line4', 'postcode', 'country')
-
+                                 'line4')
 # Pagination settings
 
 OFFERS_PER_PAGE = 20

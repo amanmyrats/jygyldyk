@@ -21,6 +21,7 @@ from django.apps import apps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
+from django.conf.urls.i18n import i18n_patterns
 
 from core.application import OscarConfig
 from core.loading import get_class
@@ -40,11 +41,16 @@ wishlists_app = apps.get_app_config('wishlists')
 password_reset_form = get_class('customer.forms', 'PasswordResetForm')
 set_password_form = SetPasswordForm
 
-
 urlpatterns = [
-    path('', RedirectView.as_view(url=settings.HOMEPAGE), name='home'),
     path('admin/', admin.site.urls),
     
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('rosetta/', include('rosetta.urls')),
+]
+
+urlpatterns += i18n_patterns(
+    path('', RedirectView.as_view(url=settings.HOMEPAGE), name='home'),
+
     path('catalogue/', catalogue_app.urls),
     path('basket/', basket_app.urls),
     path('checkout/', checkout_app.urls),
@@ -85,4 +91,4 @@ urlpatterns = [
             template_name='registration/password_reset_complete.html'
         )),
         name='password-reset-complete'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

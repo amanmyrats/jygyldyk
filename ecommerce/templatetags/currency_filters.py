@@ -16,6 +16,8 @@ def currency(value, currency=None):
     """
     if currency is None:
         currency = settings.DEFAULT_CURRENCY
+    # For testing purposes
+    currency = settings.DEFAULT_CURRENCY
 
     try:
         value = D(value)
@@ -24,12 +26,16 @@ def currency(value, currency=None):
     # Using Babel's currency formatting
     # http://babel.pocoo.org/en/latest/api/numbers.html#babel.numbers.format_currency
     CURRENCY_FORMAT = getattr(settings, 'CURRENCY_FORMAT', None)
+
     kwargs = {
         'currency': currency,
         'locale': to_locale(get_language() or settings.LANGUAGE_CODE)
     }
+
     if isinstance(CURRENCY_FORMAT, dict):
         kwargs.update(CURRENCY_FORMAT.get(currency, {}))
     else:
         kwargs['format'] = CURRENCY_FORMAT
+    # locale always tk
+    kwargs['locale'] = settings.LANGUAGE_CODE
     return format_currency(value, **kwargs)
