@@ -6,9 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
-./ecommerce/media/*
+./ecommerce/media/
 ./ecommerce/venv/
-./ecommerce/static/*
+./ecommerce/static/
 */node_modules/
 .env.dev
 .env.prod
