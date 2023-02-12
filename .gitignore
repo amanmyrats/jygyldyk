@@ -8,7 +8,7 @@ __pycache__/
 
 ./ecommerce/media/*
 ./ecommerce/venv/
-# ./ecommerce/static/*
+./ecommerce/static/*
 */node_modules/
 .env.dev
 .env.prod
