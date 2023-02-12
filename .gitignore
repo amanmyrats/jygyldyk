@@ -9,7 +9,8 @@ __pycache__/
 ./ecommerce/media/*
 ./ecommerce/venv/
 */node_modules/
-
+.env*
+./*/.env*
 
 # Distribution / packaging
 .Python

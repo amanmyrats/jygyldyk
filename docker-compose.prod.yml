@@ -1,22 +1,22 @@
 version: '3.8'
 
 services:
-  lomay:
+  jygyldykwebhost:
     build:
       context: ./ecommerce
       dockerfile: Dockerfile.prod
-    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8002
     volumes:
-      - static_volume:/home/app/lomay/static
-      - media_volume:/home/app/lomay/media
+      - static_volume:/home/app/jygyldyk/static
+      - media_volume:/home/app/jygyldyk/media
     expose:
-      - 8000
+      - 8002
     restart: always
     env_file:
       - ./.env.prod
     depends_on:
-      - db
-  db:
+      - jygyldykdbhost
+  jygyldykdbhost:
     image: postgres:13.0-alpine
     restart: always
     volumes:
@@ -27,12 +27,12 @@ services:
     build: ./nginx
     restart: always
     volumes:
-      - static_volume:/home/app/lomay/static
-      - media_volume:/home/app/lomay/media
+      - static_volume:/home/app/jygyldyk/static
+      - media_volume:/home/app/jygyldyk/media
     ports:
-      - 80:80
+      - 8080:8080
     depends_on:
-      - lomay
+      - jygyldykwebhost
 
 volumes:
   postgres_data:
