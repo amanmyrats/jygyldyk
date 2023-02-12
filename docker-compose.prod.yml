@@ -30,7 +30,7 @@ services:
       - static_volume:/home/app/jygyldyk/static
       - media_volume:/home/app/jygyldyk/media
     ports:
-      - 8080:8080
+      - 8888:8888
     depends_on:
       - jygyldykwebhost
 
