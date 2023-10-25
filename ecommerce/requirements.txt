@@ -73,3 +73,5 @@ freezegun>=1.1,<2
 django-rosetta
 goslate
 gunicorn
+
+djangorestframework==3.14.0

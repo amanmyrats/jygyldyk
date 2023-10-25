@@ -17,12 +17,16 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 
 from core.loading import get_class
+from .views import (
+    ProductDetailView, CatalogueView, ProductCategoryView
+)
+from webapps.offer.views import RangeDetailView
 
 
-detail_view = get_class('catalogue.views', 'ProductDetailView')
-catalogue_view = get_class('catalogue.views', 'CatalogueView')
-category_view = get_class('catalogue.views', 'ProductCategoryView')
-range_view = get_class('offer.views', 'RangeDetailView')
+detail_view = ProductDetailView
+catalogue_view = CatalogueView
+category_view = ProductCategoryView
+range_view = RangeDetailView
 
 
 urlpatterns = [
@@ -34,4 +38,8 @@ urlpatterns = [
         r'^category/(?P<category_slug>[\w-]+(/[\w-]+)*)_(?P<pk>\d+)/$',
         category_view.as_view(), name='category'),
     path('ranges/<slug:slug>/', range_view.as_view(), name='range'),
+]
+
+urlpatterns += [
+    re_path(r'^(?P<product_slug>[\w-]*)_(?P<product_pk>\d+)/reviews/', include('webapps.catalogue.reviews.urls')),
 ]

@@ -51,6 +51,14 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('', RedirectView.as_view(url=settings.HOMEPAGE), name='home'),
 
+    # API
+    # API
+    # API
+    path('api/v1/', include('api.urls')),
+    # API
+    # API
+    # API
+
     path('catalogue/', catalogue_app.urls),
     path('basket/', basket_app.urls),
     path('checkout/', checkout_app.urls),

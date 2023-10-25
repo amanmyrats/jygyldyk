@@ -10,8 +10,11 @@ from core.loading import get_class, get_model
 from core.utils import redirect_to_referrer
 from views.generic import BulkEditMixin
 
-PageTitleMixin = get_class('customer.mixins', 'PageTitleMixin')
-Notification = get_model('communication', 'Notification')
+from webapps.customer.mixins import PageTitleMixin
+from webapps.communication.models import Notification
+
+# PageTitleMixin = get_class('customer.mixins', 'PageTitleMixin')
+# Notification = get_model('communication', 'Notification')
 
 
 class NotificationListView(PageTitleMixin, generic.ListView):

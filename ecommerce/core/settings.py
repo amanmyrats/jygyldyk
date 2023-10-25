@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'rest_framework',
+
     'rosetta',
 
     'django.forms',
@@ -101,6 +103,10 @@ INSTALLED_APPS = [
     'django_tables2',
 
     'sorl.thumbnail',
+
+    # API
+    'api',
+    'api.v1',
 
 ]
 
@@ -519,3 +525,229 @@ HAYSTACK_CONNECTIONS = {
         # 'INCLUDE_SPELLING': True,
     },
 }
+
+
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+# API
+
+"""
+All api settings are defined in :mod:`api.settings`.
+
+To set these settings in you django `settings.py` file, prefix them with
+``. So :const:`api.settings.EXPOSE_USER_DETAILS` becomes:
+`EXPOSE_USER_DETAILS`
+"""
+from django.contrib.auth import get_user_model
+from api.utils.settings import overridable
+# from api import version
+
+# User = get_user_model()
+
+
+#: :const: BLOCK_ADMIN_API_ACCESS is useful in production websites where you
+#: want to make sure that the admin api is not exposed at all.
+BLOCK_ADMIN_API_ACCESS = overridable("BLOCK_ADMIN_API_ACCESS", True)
+
+#: EXPOSE_USER_DETAILS
+#: The ``Login`` view (``GET``) and the ``owner`` field in the
+#: ``BasketSerializer`` and ``CheckoutSerializer`` expose user details, like
+#: username and email address. With this setting you can enable/disable this behaviour.
+EXPOSE_USER_DETAILS = overridable("EXPOSE_USER_DETAILS", False)
+
+#: Enables the ``register`` endpoint so it's possible to create new user accounts.
+ENABLE_REGISTRATION = overridable("ENABLE_REGISTRATION", False)
+
+#: Changes the headers for the admin api when downloading images.
+LAZY_REMOTE_FILE_REQUEST_HEADERS = overridable(
+    "LAZY_REMOTE_FILE_REQUEST_HEADERS",
+    default={"User-Agent": f"django-oscar-api/v1"},
+)
+
+FILE_DOWNLOADER_MODULE = overridable(
+    "FILE_DOWNLOADER_MODULE", default="download.default"
+)
+
+
+VOUCHER_FIELDS = overridable(
+    "VOUCHER_FIELDS",
+    default=("name", "code", "start_datetime", "end_datetime"),
+)
+"ik ben harrie"
+BASKET_FIELDS = overridable(
+    "BASKET_FIELDS",
+    default=(
+        "id",
+        "owner",
+        "status",
+        "lines",
+        "url",
+        "total_excl_tax",
+        "total_excl_tax_excl_discounts",
+        "total_incl_tax",
+        "total_incl_tax_excl_discounts",
+        "total_tax",
+        "currency",
+        "voucher_discounts",
+        "offer_discounts",
+        "is_tax_known",
+    ),
+)
+BASKETLINE_FIELDS = overridable(
+    "BASKETLINE_FIELDS",
+    default=(
+        "url",
+        "product",
+        "quantity",
+        "attributes",
+        "price_currency",
+        "price_excl_tax",
+        "price_incl_tax",
+        "price_incl_tax_excl_discounts",
+        "price_excl_tax_excl_discounts",
+        "is_tax_known",
+        "warning",
+        "basket",
+        "stockrecord",
+        "date_created",
+        "date_updated",
+    ),
+)
+
+ORDERLINE_FIELDS = overridable(
+    "ORDERLINE_FIELDS",
+    default=(
+        "attributes",
+        "url",
+        "product",
+        "stockrecord",
+        "quantity",
+        "price_currency",
+        "price_excl_tax",
+        "price_incl_tax",
+        "price_incl_tax_excl_discounts",
+        "price_excl_tax_excl_discounts",
+        "order",
+    ),
+)
+SURCHARGE_FIELDS = overridable(
+    "SURCHARGE_FIELDS",
+    default=("name", "code", "incl_tax", "excl_tax"),
+)
+ORDER_FIELDS = overridable(
+    "ORDER_FIELDS",
+    default=(
+        "number",
+        "basket",
+        "url",
+        "lines",
+        "owner",
+        "billing_address",
+        "currency",
+        "total_incl_tax",
+        "total_excl_tax",
+        "shipping_incl_tax",
+        "shipping_excl_tax",
+        "shipping_address",
+        "shipping_method",
+        "shipping_code",
+        "status",
+        "email",
+        "date_placed",
+        "payment_url",
+        "offer_discounts",
+        "voucher_discounts",
+        "surcharges",
+    ),
+)
+INITIAL_ORDER_STATUS = overridable("INITIAL_ORDER_STATUS", default="new")
+USERADDRESS_FIELDS = overridable(
+    "USERADDRESS_FIELDS",
+    default=(
+        "id",
+        "title",
+        "first_name",
+        "last_name",
+        "line1",
+        "line2",
+        "line3",
+        "line4",
+        "state",
+        "postcode",
+        "search_text",
+        "phone_number",
+        "notes",
+        "is_default_for_shipping",
+        "is_default_for_billing",
+        "country",
+        "url",
+    ),
+)
+USER_FIELDS = ['username', "email", "date_joined"]
+
+OPTION_FIELDS = overridable("OPTION_FIELDS", default="__all__")
+PRODUCT_ATTRIBUTE_VALUE_FIELDS = overridable(
+    "PRODUCT_ATTRIBUTE_VALUE_FIELDS",
+    default=("name", "value", "code", "product"),
+)
+RECOMMENDED_PRODUCT_FIELDS = overridable(
+    "RECOMMENDED_PRODUCT_FIELDS", default=("url",)
+)
+CHILDPRODUCTDETAIL_FIELDS = overridable(
+    "CHILDPRODUCTDETAIL_FIELDS",
+    default=(
+        "url",
+        "upc",
+        "id",
+        "title",
+        "structure",
+        # 'parent', 'description', 'images', are not included by default, but
+        # easily enabled by overriding CHILDPRODUCTDETAIL_FIELDS
+        # in your settings file
+        "date_created",
+        "date_updated",
+        "recommended_products",
+        "attributes",
+        "categories",
+        "product_class",
+        "price",
+        "availability",
+        "options",
+    ),
+)
+PRODUCTDETAIL_FIELDS = overridable(
+    "PRODUCTDETAIL_FIELDS",
+    default=(
+        "url",
+        "upc",
+        "id",
+        "title",
+        "description",
+        "structure",
+        "date_created",
+        "date_updated",
+        "recommended_products",
+        "attributes",
+        "categories",
+        "product_class",
+        "images",
+        "price",
+        "availability",
+        "stockrecords",
+        "options",
+        "children",
+    ),
+)
+PRODUCT_FIELDS = overridable(
+    "PRODUCT_FIELDS", default=("url", "id", "upc", "title")
+)
+ADMIN_USER_FIELDS = ["url", "username", "email", "date_joined"]
