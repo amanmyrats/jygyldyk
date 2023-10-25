@@ -72,5 +72,4 @@ freezegun>=1.1,<2
 #
 django-rosetta
 goslate
-django-environ
 gunicorn

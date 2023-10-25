@@ -2,10 +2,12 @@ from django import template
 from django.contrib.sessions.serializers import JSONSerializer
 
 from core.loading import get_class, get_model
+from webapps.basket.forms import AddToBasketForm, SimpleAddToBasketForm
+from webapps.catalogue.models import Product
 
-AddToBasketForm = get_class('basket.forms', 'AddToBasketForm')
-SimpleAddToBasketForm = get_class('basket.forms', 'SimpleAddToBasketForm')
-Product = get_model('catalogue', 'product')
+# AddToBasketForm = get_class('basket.forms', 'AddToBasketForm')
+# SimpleAddToBasketForm = get_class('basket.forms', 'SimpleAddToBasketForm')
+# Product = get_model('catalogue', 'product')
 
 register = template.Library()
 

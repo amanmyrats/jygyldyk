@@ -1,8 +1,9 @@
 from django import template
 
 from core.loading import get_class
+from webapps.dashboard.menu import get_nodes
 
-get_nodes = get_class('dashboard.menu', 'get_nodes')
+# get_nodes = get_class('dashboard.menu', 'get_nodes')
 register = template.Library()
 
 

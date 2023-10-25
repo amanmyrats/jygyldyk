@@ -8,10 +8,13 @@ from django.utils.translation import gettext_lazy as _
 from core.loading import get_model
 from customforms import widgets
 
-Line = get_model('basket', 'line')
-Basket = get_model('basket', 'basket')
-Option = get_model('catalogue', 'option')
-Product = get_model('catalogue', 'product')
+from .models import Line, Basket
+from webapps.catalogue.models import Option, Product
+
+# Line = get_model('webapps.basket', 'line')
+# Basket = get_model('basket', 'basket')
+# Option = get_model('catalogue', 'option')
+# Product = get_model('catalogue', 'product')
 
 
 def _option_text_field(form, product, option):

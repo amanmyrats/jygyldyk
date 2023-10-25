@@ -1,9 +1,10 @@
 from django import template
 
 from core.loading import get_model
+from webapps.catalogue.models import Category
 
 register = template.Library()
-Category = get_model("catalogue", "category")
+# Category = get_model("webapps.catalogue", "category")
 
 
 class PassThrough(object):

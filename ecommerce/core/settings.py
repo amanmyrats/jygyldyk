@@ -32,13 +32,16 @@ environ.Env.read_env(BASE_DIR /  '.env')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "somesescretkey"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ because of casting above
-DEBUG = os.environ.get('DEBUG', False)
+# DEBUG = os.environ.get('DEBUG', False)
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -179,13 +182,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+    #     "NAME": os.environ.get("SQL_DB", str(BASE_DIR / "db.sqlite3")),
+    #     "USER": os.environ.get("SQL_USER", ""),
+    #     "PASSWORD": os.environ.get("SQL_PASSWORD", ""),
+    #     "HOST": os.environ.get("SQL_HOST", ""),
+    #     "PORT": os.environ.get("SQL_PORT", ""),
+    # }
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DB", str(BASE_DIR / "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", ""),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", ""),
-        "HOST": os.environ.get("SQL_HOST", ""),
-        "PORT": os.environ.get("SQL_PORT", ""),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite3",
     }
 }
 

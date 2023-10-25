@@ -3,8 +3,8 @@ import json
 from django.conf import settings
 
 from core.loading import get_model
-
-Product = get_model('catalogue', 'Product')
+from webapps.catalogue.models import Product
+# Product = get_model('catalogue', 'Product')
 
 
 class CustomerHistoryManager:

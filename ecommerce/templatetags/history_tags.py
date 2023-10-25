@@ -3,11 +3,13 @@ from urllib import parse
 from django import template
 from django.urls import Resolver404, resolve
 from django.utils.translation import gettext_lazy as _
+from django.contrib.sites.models import Site
 
 from core.loading import get_class, get_model
+from webapps.customer.history import CustomerHistoryManager
 
-Site = get_model('sites', 'Site')
-CustomerHistoryManager = get_class('customer.history', 'CustomerHistoryManager')
+# Site = get_model('sites', 'Site')
+# CustomerHistoryManager = get_class('customer.history', 'CustomerHistoryManager')
 
 register = template.Library()
 

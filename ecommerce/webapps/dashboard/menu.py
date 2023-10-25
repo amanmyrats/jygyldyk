@@ -3,8 +3,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.module_loading import import_string
 
 from core.loading import get_class
-
-Node = get_class('dashboard.nav', 'Node')
+from webapps.dashboard.nav import Node
+# Node = get_class('dashboard.nav', 'Node')
 
 
 def get_nodes(user):
