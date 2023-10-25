@@ -1,4 +1,4 @@
-{% extends "oscar/customer/baseaccountpage.html" %}
+{% extends "customer/baseaccountpage.html" %}
 {% load i18n %}
 
 {% block tabcontent %}
@@ -50,7 +50,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% include "oscar/partials/pagination.html" %}
+        {% include "partials/pagination.html" %}
     {% else %}
         <p>{% trans 'There are no addresses in your address book.' %}</p>
     {% endif %}

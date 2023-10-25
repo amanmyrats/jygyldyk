@@ -1,17 +1,17 @@
-{% extends "oscar/customer/baseaccountpage.html" %}
+{% extends "customer/baseaccountpage.html" %}
 {% load currency_filters %}
 {% load i18n %}
 {% load static %}
 
 {% block styles %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static "oscar/js/bootstrap4-datetimepicker/tempusdominus-bootstrap-4.min.css" %}" />
+    <link rel="stylesheet" href="{% static "js/bootstrap4-datetimepicker/tempusdominus-bootstrap-4.min.css" %}" />
 {% endblock %}
 
 {% block scripts %}
     {{ block.super }}
-    <script src="{% static "oscar/js/bootstrap4-datetimepicker/moment-with-locales.min.js" %}"></script>
-    <script src="{% static "oscar/js/bootstrap4-datetimepicker/tempusdominus-bootstrap-4.min.js" %}"></script>
+    <script src="{% static "js/bootstrap4-datetimepicker/moment-with-locales.min.js" %}"></script>
+    <script src="{% static "js/bootstrap4-datetimepicker/tempusdominus-bootstrap-4.min.js" %}"></script>
 {% endblock %}
 
 
@@ -35,7 +35,7 @@
         <div class="card card-body bg-light">
             <h2>{% trans "Filter" %}</h2>
             <form method="get">
-                {% include "oscar/partials/form_fields.html" with form=form style='horizontal' %}
+                {% include "partials/form_fields.html" with form=form style='horizontal' %}
                 <div class="form-group row">
                     <div class="offset-sm-4 col-sm-8">
                         <button type="submit" class="btn btn-primary" data-loading-text="{% trans 'Filtering...' %}">{% trans 'Filter results' %}</button>
@@ -64,7 +64,7 @@
                 </tr>
             {% endfor %}
         </table>
-        {% include "oscar/partials/pagination.html" %}
+        {% include "partials/pagination.html" %}
     {% else %}
         {% if form.is_bound %}
             <p>{% trans "No orders match your search." %}</p>

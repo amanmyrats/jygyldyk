@@ -20,7 +20,7 @@ from utils.deprecation import RemovedInOscar32Warning
 MOVED_MODELS = {}
 
 
-def get_class(module_label, classname, module_prefix='apps'):
+def get_class(module_label, classname, module_prefix='webapps'):
     """
     Dynamically import a single class from the given module.
 
@@ -43,7 +43,7 @@ def get_class_loader():
     return import_string(settings.DYNAMIC_CLASS_LOADER)
 
 
-def get_classes(module_label, classnames, module_prefix='apps'):
+def get_classes(module_label, classnames, module_prefix='webapps'):
     class_loader = get_class_loader()
     return class_loader(module_label, classnames, module_prefix)
 
@@ -74,14 +74,14 @@ def default_class_loader(module_label, classnames, module_prefix):
         Load a single class:
 
         >>> get_class('dashboard.catalogue.forms', 'ProductForm')
-        apps.dashboard.catalogue.forms.ProductForm
+        webapps.dashboard.catalogue.forms.ProductForm
 
         Load a list of classes:
 
         >>> get_classes('dashboard.catalogue.forms',
         ...             ['ProductForm', 'StockRecordForm'])
-        [apps.dashboard.catalogue.forms.ProductForm,
-         apps.dashboard.catalogue.forms.StockRecordForm]
+        [webapps.dashboard.catalogue.forms.ProductForm,
+         webapps.dashboard.catalogue.forms.StockRecordForm]
 
     Raises:
 
@@ -101,12 +101,12 @@ def default_class_loader(module_label, classnames, module_prefix):
             "Importing from top-level modules is not supported")
 
     # import from Oscar package (should succeed in most cases)
-    # e.g. 'apps.dashboard.catalogue.forms'
+    # e.g. 'webapps.dashboard.catalogue.forms'
     oscar_module_label = "%s.%s" % (module_prefix, module_label)
     oscar_module = _import_module(oscar_module_label, classnames)
 
-    # returns e.g. 'apps.dashboard.catalogue',
-    # 'yourproject.apps.dashboard.catalogue' or 'dashboard.catalogue',
+    # returns e.g. 'webapps.dashboard.catalogue',
+    # 'yourproject.webapps.dashboard.catalogue' or 'dashboard.catalogue',
     # depending on what is set in INSTALLED_APPS
     app_name = _find_registered_app_name(module_label)
     if app_name.startswith('%s.' % module_prefix):
@@ -241,6 +241,7 @@ def get_model(app_label, model_name):
                 'please update your imports.' % (model_name, original_app_label, app_label),
                 RemovedInOscar32Warning, stacklevel=2)
     try:
+        # print(app_label, model_name)
         return apps.get_model(app_label, model_name)
     except AppRegistryNotReady:
         if apps.apps_ready and not apps.models_ready:

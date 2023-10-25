@@ -9,26 +9,36 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os 
+import environ
 
 from pathlib import Path
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR /  '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nf%%xq+y-v0n1jpgm&(luipr+uwmvq%bt217sn7+xe4y8!!f@p'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# False if not in os.environ because of casting above
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
 
 # Application definition
@@ -41,26 +51,54 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.flatpages',
 
-    'apps',
-    'apps.offer',
-    'apps.search',
-    'apps.customer',
-    'apps.address',
-    'apps.partner',
-    'apps.communication',
-    'apps.catalogue',
-    'apps.catalogue.reviews',
-    'apps.wishlists',
-    'apps.voucher',
-    'apps.basket',
-    'apps.checkout',
-    'apps.payment',
-    'apps.order',
-    'apps.shipping',
-    'apps.analytics',
+    'rosetta',
 
+    'django.forms',
+
+    'webapps',
+    'webapps.offer',
+    'webapps.search',
+    'webapps.customer',
+    'webapps.address',
+    'webapps.partner',
+    'webapps.communication',
+    'webapps.catalogue',
+    'webapps.catalogue.reviews',
+    'webapps.wishlists',
+    'webapps.voucher',
+    'webapps.basket',
+    'webapps.checkout',
+    'webapps.payment',
+    'webapps.order',
+    'webapps.shipping',
+    'webapps.analytics',
+
+    'webapps.dashboard',
+    'webapps.dashboard.catalogue',
+    'webapps.dashboard.communications',
+    'webapps.dashboard.offers',
+    'webapps.dashboard.orders',
+    'webapps.dashboard.pages',
+    'webapps.dashboard.partners',
+    'webapps.dashboard.ranges',
+    'webapps.dashboard.reports',
+    'webapps.dashboard.reviews',
+    'webapps.dashboard.shipping',
+    'webapps.dashboard.users',
+    'webapps.dashboard.vouchers',
+    
     'utils',
+
+    # # 3rd-party apps that oscar depends on
+    'widget_tweaks',
+    'haystack',
+    'treebeard',
+    'django_tables2',
+
+    'sorl.thumbnail',
+
 ]
 
 SITE_ID=1
@@ -69,19 +107,34 @@ SITE_ID=1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'webapps.basket.middleware.BasketMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'webapps.customer.auth_backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 ROOT_URLCONF = 'core.urls'
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")  # ROOT dir for templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,'templates'),
+            # os.path.join(BASE_DIR,django.__path__[0],'/forms/templates'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +142,32 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+
+                'webapps.search.context_processors.search_form',
+                'webapps.checkout.context_processors.checkout',
+                'webapps.communication.notifications.context_processors.notifications',
+                'core.context_processors.metadata',
             ],
+            'libraries': {
+                'basket_tags':'templatetags.basket_tags',
+                'category_tags':'templatetags.category_tags',
+                'currency_filters':'templatetags.currency_filters',
+                'dashboard_tags':'templatetags.dashboard_tags',
+                'datetime_filters':'templatetags.datetime_filters',
+                'display_tags':'templatetags.display_tags',
+                'form_tags':'templatetags.form_tags',
+                'history_tags':'templatetags.history_tags',
+                'image_tags':'templatetags.image_tags',
+                'product_tags':'templatetags.product_tags',
+                'purchase_info_tags':'templatetags.purchase_info_tags',
+                'reviews_tags':'templatetags.reviews_tags',
+                'shipping_tags':'templatetags.shipping_tags',
+                'sorting_tags':'templatetags.sorting_tags',
+                'string_filters':'templatetags.string_filters',
+                'url_tags':'templatetags.url_tags',
+                'wishlist_tags':'templatetags.wishlist_tags',
+            }
         },
     },
 ]
@@ -101,9 +179,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DB", str(BASE_DIR / "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", ""),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", ""),
+        "HOST": os.environ.get("SQL_HOST", ""),
+        "PORT": os.environ.get("SQL_PORT", ""),
     }
 }
 
@@ -130,7 +212,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tk'
 
 TIME_ZONE = 'UTC'
 
@@ -140,18 +222,35 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('tk', _('Turkmen')),
+    ('en-us', _('English')),
+    ('ru', _('Russian')),
+)
+
+LOCALE_PATHS = [
+    Path(BASE_DIR, 'locale'),
+]
+
+ROSETTA_EXCLUDE_PATHS = ['venv',]
+ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
+BING_APP_ID = None
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / "static_files",
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
 
 
 
-
-
-
-SHOP_NAME = 'Oscar'
+SHOP_NAME = 'Internet Söwda Nokady'
 SHOP_TAGLINE = ''
 HOMEPAGE = reverse_lazy('catalogue:index')
 
@@ -171,7 +270,7 @@ RECENTLY_VIEWED_COOKIE_SECURE = False
 RECENTLY_VIEWED_PRODUCTS = 20
 
 # Currency
-DEFAULT_CURRENCY = 'GBP'
+DEFAULT_CURRENCY = 'TMT'
 
 # Paths
 IMAGE_FOLDER = 'images/products/%Y/%m/'
@@ -182,9 +281,10 @@ DELETE_IMAGE_FILES = True
 MISSING_IMAGE_URL = 'image_not_found.jpg'
 
 # Address settings
+# REQUIRED_ADDRESS_FIELDS = ('first_name', 'last_name', 'line1',
+#                                  'line4', 'postcode', 'country')
 REQUIRED_ADDRESS_FIELDS = ('first_name', 'last_name', 'line1',
-                                 'line4', 'postcode', 'country')
-
+                                 'line4')
 # Pagination settings
 
 OFFERS_PER_PAGE = 20
@@ -360,7 +460,7 @@ DASHBOARD_NAVIGATION = [
         'url_name': 'dashboard:reports-index',
     },
 ]
-# DASHBOARD_DEFAULT_ACCESS_FUNCTION = 'apps.dashboard.nav.default_access_fn'  # noqa
+DASHBOARD_DEFAULT_ACCESS_FUNCTION = 'webapps.dashboard.nav.default_access_fn'  # noqa
 
 # Search facets
 SEARCH_FACETS = {
@@ -406,9 +506,9 @@ SAVE_SENT_EMAILS_TO_DB = True
 # Solr 6.x
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/sandbox',
-        'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores',
-        'INCLUDE_SPELLING': True,
+        # 'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        # 'URL': 'http://127.0.0.1:8983/solr/sandbox',
+        # 'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores',
+        # 'INCLUDE_SPELLING': True,
     },
 }

@@ -1,4 +1,4 @@
-{% extends "oscar/checkout/checkout.html" %}
+{% extends "checkout/checkout.html" %}
 {% load i18n %}
 
 {% block title %}
@@ -11,7 +11,7 @@
 {% block payment_details %}{% endblock %}
 
 {% block checkout_nav %}
-    {% include 'oscar/checkout/nav.html' with step=1 %}
+    {% include 'checkout/nav.html' with step=1 %}
 {% endblock %}
 
 {% block checkout_title %}{% trans "Edit address" %}{% endblock %}
@@ -20,7 +20,7 @@
     <div class="card card-body bg-light">
         <form id="update_user_address" method="post">
             {% csrf_token %}
-            {% include "oscar/partials/form_fields.html" with form=form style='horizontal' %}
+            {% include "partials/form_fields.html" with form=form style='horizontal' %}
             <div class="form-group row">
                 <div class="offset-sm-4 col-sm-8">
                     <button type="submit" class="btn btn-lg btn-primary" data-loading-text="{% trans 'Saving...' %}">{% trans "Save" %}</button>

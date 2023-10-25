@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load dashboard_tags %}
 {% load i18n %}
 {% load render_table from django_tables2 %}
@@ -30,7 +30,7 @@
     </div>
     <div class="card card-body">
         <form method="get" class="form-inline">
-            {% include "oscar/dashboard/partials/form_fields_inline.html" with form=form %}
+            {% include "dashboard/partials/form_fields_inline.html" with form=form %}
             <button type="submit" name="search" class="btn btn-primary mr-2" data-loading-text="{% trans 'Searching...' %}">{% trans "Search" %}</button>
             <a href="{% url 'dashboard:users-index' %}" class="btn btn-secondary">{% trans "Reset" %}</a>
         </form>

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  jygyldykwebhost:
+    build:
+      context: ./ecommerce
+      dockerfile: Dockerfile.prod
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8002
+    volumes:
+      - static_volume:/home/app/jygyldyk/static
+      - media_volume:/home/app/jygyldyk/media
+    expose:
+      - 8002
+    restart: always
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - jygyldykdbhost
+  jygyldykdbhost:
+    image: postgres:13.0-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+  nginx:
+    build: ./nginx
+    restart: always
+    volumes:
+      - static_volume:/home/app/jygyldyk/static
+      - media_volume:/home/app/jygyldyk/media
+    ports:
+      - 8888:8888
+    depends_on:
+      - jygyldykwebhost
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

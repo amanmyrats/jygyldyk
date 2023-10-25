@@ -24,8 +24,8 @@ def subfolders(path):
     """
     Decompose a path string into a list of subfolders
 
-    Eg Convert 'apps/dashboard/ranges' into
-       ['apps', 'apps/dashboard', 'apps/dashboard/ranges']
+    Eg Convert 'webapps/dashboard/ranges' into
+       ['webapps', 'webapps/dashboard', 'webapps/dashboard/ranges']
     """
     folders = []
     while path not in ('/', ''):
@@ -83,7 +83,7 @@ def fork_app(label, local_folder_path, local_app_subpackage=None, logger=None):
 
     local_apps_package = local_folder_path.lstrip('/').replace('/', '.')
     if local_app_subpackage is None:
-        local_app_subpackage = app_config.name.replace('oscar.apps.', '')
+        local_app_subpackage = app_config.name.replace('webapps.', '')
         # In case this is a fork of a fork
         local_app_subpackage = local_app_subpackage.replace(local_apps_package, '')
 

@@ -1,4 +1,4 @@
-{% extends "oscar/checkout/layout.html" %}
+{% extends "checkout/layout.html" %}
 {% load currency_filters %}
 {% load i18n %}
 {% load image_tags %}
@@ -10,7 +10,7 @@
 {% endblock title %}
 
 {% block checkout_nav %}
-    {% include 'oscar/checkout/nav.html' with step=5 %}
+    {% include 'checkout/nav.html' with step=5 %}
 {% endblock %}
 
 {% block checkout_title %}
@@ -161,7 +161,7 @@
                     <div class="sub-header">
                         <h2>{% trans 'Totals' %}</h2>
                     </div>
-                    {% include 'oscar/order/partials/basket_totals.html' %}
+                    {% include 'order/partials/basket_totals.html' %}
                 </div>
             </div>
         {% endblock basket_totals %}
@@ -195,6 +195,6 @@
 
 {% block tracking %}
     {% if send_analytics_event %}
-        {% include "oscar/partials/google_analytics_transaction.html" %}
+        {% include "partials/google_analytics_transaction.html" %}
     {% endif %}
 {% endblock %}

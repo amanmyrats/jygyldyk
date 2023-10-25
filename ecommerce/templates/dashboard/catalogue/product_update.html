@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load i18n %}
 
 {% block body_class %}{{ block.super }} create-page catalogue{% endblock %}
@@ -138,7 +138,7 @@
 
                                         {% for field in form.primary_form_fields %}
                                             {% if 'attr' not in field.id_for_label %}
-                                                {% include 'oscar/dashboard/partials/form_field.html' with field=field %}
+                                                {% include 'dashboard/partials/form_field.html' with field=field %}
                                             {% endif %}
                                         {% endfor %}
                                     {% endblock product_details_content %}
@@ -156,7 +156,7 @@
                                         {% for category_form in category_formset %}
                                             <tr>
                                                 <td class="form-inline">
-                                                    {% include "oscar/dashboard/partials/form_fields_inline.html" with form=category_form %}
+                                                    {% include "dashboard/partials/form_fields_inline.html" with form=category_form %}
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -179,7 +179,7 @@
                                             {% if 'attr' in field.id_for_label %}
                                                 <tr>
                                                     <td>
-                                                        {% include "oscar/dashboard/partials/form_field.html" %}
+                                                        {% include "dashboard/partials/form_field.html" %}
                                                     </td>
                                                 </tr>
                                             {% endif %}
@@ -200,7 +200,7 @@
                                         {{ image_formset.non_form_errors }}
                                         <ol class='upload-image'>
                                             {% for image_form in image_formset %}
-                                                {% include "oscar/dashboard/partials/product_images.html" with form=image_form %}
+                                                {% include "dashboard/partials/product_images.html" with form=image_form %}
                                             {% endfor %}
                                         </ol>
                                         <p class="form-text">
@@ -244,18 +244,18 @@
                                                 </tr>
                                                 {% endif %}
                                                 <tr>
-                                                    <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.partner nolabel=True %}</td>
-                                                    <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.partner_sku nolabel=True %}</td>
+                                                    <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.partner nolabel=True %}</td>
+                                                    <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.partner_sku nolabel=True %}</td>
                                                     {% if product_class.track_stock %}
-                                                        <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.num_in_stock nolabel=True %}</td>
+                                                        <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.num_in_stock nolabel=True %}</td>
                                                         <td>{{ stockrecord_form.instance.num_allocated|default:"-" }}</td>
-                                                        <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.low_stock_threshold nolabel=True %}</td>
+                                                        <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.low_stock_threshold nolabel=True %}</td>
                                                     {% endif %}
-                                                    <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.price_currency nolabel=True %}</td>
-                                                    <td>{% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.price nolabel=True %}</td>
+                                                    <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.price_currency nolabel=True %}</td>
+                                                    <td>{% include "dashboard/partials/form_field.html" with field=stockrecord_form.price nolabel=True %}</td>
                                                     <td>
-                                                        {% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.id nolabel=True %}
-                                                        {% include "oscar/dashboard/partials/form_field.html" with field=stockrecord_form.DELETE nolabel=True %}
+                                                        {% include "dashboard/partials/form_field.html" with field=stockrecord_form.id nolabel=True %}
+                                                        {% include "dashboard/partials/form_field.html" with field=stockrecord_form.DELETE nolabel=True %}
                                                     </td>
                                                 </tr>
                                             {% endfor %}
@@ -332,7 +332,7 @@
                                         {% for recommended_form in recommended_formset %}
                                             <tr>
                                                 <td class="form-inline">
-                                                    {% include "oscar/dashboard/partials/form_fields_inline.html" with form=recommended_form %}
+                                                    {% include "dashboard/partials/form_fields_inline.html" with form=recommended_form %}
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -350,7 +350,7 @@
                                     {% block seo_content %}
                                         {% for field in form.seo_form_fields %}
                                             {% if 'attr' not in field.id_for_label %}
-                                                {% include 'oscar/dashboard/partials/form_field.html' with field=field %}
+                                                {% include 'dashboard/partials/form_field.html' with field=field %}
                                             {% endif %}
                                         {% endfor %}
                                     {% endblock seo_content %}

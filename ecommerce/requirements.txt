@@ -13,7 +13,7 @@ django-redis>=4.12,<5.3
 pysolr>=3.9,<3.10
 redis>=3.5,<4.4
 requests>=2.25,<3
-uWSGI>=2.0.19,<2.1
+# uWSGI>=2.0.19,<2.1
 whitenoise>=5.2,<6.3
 
 # Linting
@@ -68,3 +68,9 @@ pytest-django>=3.7,<3.9
 pytest-xdist>=2.2,<3
 tox>=3.21,<4
 freezegun>=1.1,<2
+
+#
+django-rosetta
+goslate
+django-environ
+gunicorn

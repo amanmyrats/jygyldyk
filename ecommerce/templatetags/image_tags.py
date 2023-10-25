@@ -7,7 +7,7 @@ from django.db.models.fields.files import ImageFieldFile
 from django.utils.encoding import smart_str
 from django.utils.html import escape
 
-from oscar.core.thumbnails import get_thumbnailer
+from core.thumbnails import get_thumbnailer
 
 register = template.Library()
 kw_pat = re.compile(r'^(?P<key>[\w]+)=(?P<value>.+)$')
@@ -109,7 +109,7 @@ class ThumbnailNode(template.Node):
         try:
             return self._render(context)
         except Exception as e:
-            if getattr(settings, 'OSCAR_THUMBNAIL_DEBUG', settings.DEBUG):
+            if getattr(settings, 'THUMBNAIL_DEBUG', settings.DEBUG):
                 raise e
 
             logger.exception(e)

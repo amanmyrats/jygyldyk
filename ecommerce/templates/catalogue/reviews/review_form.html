@@ -1,4 +1,4 @@
-{% extends "oscar/catalogue/detail.html" %}
+{% extends "catalogue/detail.html" %}
 {% load i18n %}
 {% load reviews_tags %}
 
@@ -9,7 +9,7 @@
                 <legend>{% trans "Leave a product review" %}</legend>
                 {% csrf_token %}
 
-                {% include 'oscar/partials/form_field.html' with field=form.title %}
+                {% include 'partials/form_field.html' with field=form.title %}
 
                 <div class="reviewrating form-group {% if form.score.errors %}error{% endif %}">
                     <label for="{{ form.score.auto_id }}" class="col-form-label required">
@@ -31,16 +31,16 @@
                     </div>
 
                     {% comment %}
-                    {% include 'oscar/partials/form_field.html' with field=form.score %}
+                    {% include 'partials/form_field.html' with field=form.score %}
                     {% endcomment %}
                 </div>
 
-                {% include 'oscar/partials/form_field.html' with field=form.body %}
+                {% include 'partials/form_field.html' with field=form.body %}
                 {% if form.name %}
-                    {% include 'oscar/partials/form_field.html' with field=form.name %}
+                    {% include 'partials/form_field.html' with field=form.name %}
                 {% endif %}
                 {% if form.email %}
-                    {% include 'oscar/partials/form_field.html' with field=form.email %}
+                    {% include 'partials/form_field.html' with field=form.email %}
                 {% endif %}
 
 

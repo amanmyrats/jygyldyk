@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  jygyldykwebhost:
+    build: ./ecommerce
+    command: python3 manage.py runserver 0.0.0.0:8002
+    volumes:
+      - ./ecommerce/:/usr/src/app/
+    ports:
+      - 8002:8002
+    env_file:
+      - ./.env.dev
+    restart: always
+    depends_on:
+      - jygyldykdbhost
+  jygyldykdbhost:
+    # image: postgres:13.0-alpine
+    image: postgres:13-bullseye
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=aman
+      - POSTGRES_PASSWORD=aman
+      - POSTGRES_DB=jygyldyk
+
+volumes:
+  postgres_data:

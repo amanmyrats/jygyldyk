@@ -1,4 +1,4 @@
-{% extends "oscar/customer/baseaccountpage.html" %}
+{% extends "customer/baseaccountpage.html" %}
 {% load i18n %}
 
 {% block tabcontent %}
@@ -36,7 +36,7 @@
                     </tr>
                 {% endfor %}
             </table>
-            {% include "oscar/partials/pagination.html" %}
+            {% include "partials/pagination.html" %}
         </form>
     {% endif %}
 

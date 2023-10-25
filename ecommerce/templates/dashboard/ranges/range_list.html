@@ -1,4 +1,4 @@
-{% extends 'oscar/dashboard/layout.html' %}
+{% extends 'dashboard/layout.html' %}
 {% load i18n %}
 
 {% block title %}
@@ -93,6 +93,6 @@
             <tr><td>{% trans "No ranges found." %}</td></tr>
         {% endif %}
     </table>
-    {% include "oscar/dashboard/partials/pagination.html" %}
+    {% include "dashboard/partials/pagination.html" %}
 
 {% endblock dashboard_content %}
