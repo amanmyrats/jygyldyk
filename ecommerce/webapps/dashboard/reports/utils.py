@@ -1,14 +1,20 @@
 from core.loading import get_class, get_classes
 
-OrderReportGenerator = get_class('order.reports', 'OrderReportGenerator')
-ProductReportGenerator, UserReportGenerator \
-    = get_classes('analytics.reports', ['ProductReportGenerator',
-                                        'UserReportGenerator'])
-OpenBasketReportGenerator, SubmittedBasketReportGenerator \
-    = get_classes('basket.reports', ['OpenBasketReportGenerator',
-                                     'SubmittedBasketReportGenerator'])
-OfferReportGenerator = get_class('offer.reports', 'OfferReportGenerator')
-VoucherReportGenerator = get_class('voucher.reports', 'VoucherReportGenerator')
+from webapps.order.reports import OrderReportGenerator
+from webapps.analytics.reports import ProductReportGenerator, UserReportGenerator
+from webapps.basket.reports import OpenBasketReportGenerator, SubmittedBasketReportGenerator
+from webapps.offer.reports import OfferReportGenerator
+from webapps.voucher.reports import VoucherReportGenerator
+
+# OrderReportGenerator = get_class('order.reports', 'OrderReportGenerator')
+# ProductReportGenerator, UserReportGenerator \
+#     = get_classes('analytics.reports', ['ProductReportGenerator',
+#                                         'UserReportGenerator'])
+# OpenBasketReportGenerator, SubmittedBasketReportGenerator \
+#     = get_classes('basket.reports', ['OpenBasketReportGenerator',
+#                                      'SubmittedBasketReportGenerator'])
+# OfferReportGenerator = get_class('offer.reports', 'OfferReportGenerator')
+# VoucherReportGenerator = get_class('voucher.reports', 'VoucherReportGenerator')
 
 
 class GeneratorRepository(object):

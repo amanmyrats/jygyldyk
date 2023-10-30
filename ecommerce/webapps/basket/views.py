@@ -17,18 +17,30 @@ from core import ajax
 from core.loading import get_class, get_classes, get_model
 from core.utils import is_ajax, redirect_to_referrer, safe_referrer
 
-Applicator = get_class('offer.applicator', 'Applicator')
-(BasketLineForm, AddToBasketForm, BasketVoucherForm, SavedLineForm) = get_classes(
-    'basket.forms', ('BasketLineForm', 'AddToBasketForm',
-                     'BasketVoucherForm', 'SavedLineForm'))
-BasketLineFormSet, SavedLineFormSet = get_classes(
-    'basket.formsets', ('BasketLineFormSet', 'SavedLineFormSet'))
-Repository = get_class('shipping.repository', 'Repository')
+from webapps.offer.applicator import Applicator
+from webapps.shipping.repository import Repository
+from webapps.checkout.calculators import OrderTotalCalculator
+from webapps.checkout.applicator import SurchargeApplicator
 
-OrderTotalCalculator = get_class(
-    'checkout.calculators', 'OrderTotalCalculator')
-BasketMessageGenerator = get_class('basket.utils', 'BasketMessageGenerator')
-SurchargeApplicator = get_class("checkout.applicator", "SurchargeApplicator")
+from .forms import (
+    BasketLineForm, AddToBasketForm, BasketVoucherForm, SavedLineForm
+)
+from .formsets import BasketLineFormSet, SavedLineFormSet
+from .utils import BasketMessageGenerator
+
+
+# Applicator = get_class('offer.applicator', 'Applicator')
+# (BasketLineForm, AddToBasketForm, BasketVoucherForm, SavedLineForm) = get_classes(
+#     'basket.forms', ('BasketLineForm', 'AddToBasketForm',
+#                      'BasketVoucherForm', 'SavedLineForm'))
+# BasketLineFormSet, SavedLineFormSet = get_classes(
+#     'basket.formsets', ('BasketLineFormSet', 'SavedLineFormSet'))
+# Repository = get_class('shipping.repository', 'Repository')
+
+# OrderTotalCalculator = get_class(
+#     'checkout.calculators', 'OrderTotalCalculator')
+# BasketMessageGenerator = get_class('basket.utils', 'BasketMessageGenerator')
+# SurchargeApplicator = get_class("checkout.applicator", "SurchargeApplicator")
 
 
 class BasketView(ModelFormSetView):

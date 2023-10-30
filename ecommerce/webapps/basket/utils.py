@@ -5,8 +5,11 @@ from django.template.loader import render_to_string
 
 from core.loading import get_class, get_model
 
-Applicator = get_class('offer.applicator', 'Applicator')
-ConditionalOffer = get_model('offer', 'ConditionalOffer')
+from webapps.offer.applicator import Applicator
+from webapps.offer.models import ConditionalOffer
+
+# Applicator = get_class('offer.applicator', 'Applicator')
+# ConditionalOffer = get_model('offer', 'ConditionalOffer')
 
 
 class BasketMessageGenerator(object):

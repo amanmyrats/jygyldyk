@@ -6,9 +6,12 @@ from django.views.generic import ListView
 
 from core.loading import get_class
 
-ReportForm = get_class('dashboard.reports.forms', 'ReportForm')
-GeneratorRepository = get_class('dashboard.reports.utils',
-                                'GeneratorRepository')
+from webapps.dashboard.reports.forms import ReportForm
+from webapps.dashboard.reports.utils import GeneratorRepository
+
+# ReportForm = get_class('dashboard.reports.forms', 'ReportForm')
+# GeneratorRepository = get_class('dashboard.reports.utils',
+#                                 'GeneratorRepository')
 
 
 class IndexView(ListView):

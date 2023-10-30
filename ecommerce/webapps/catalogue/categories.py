@@ -1,6 +1,8 @@
 from core.loading import get_model
 
-Category = get_model('catalogue', 'category')
+from .models import Category
+
+# Category = get_model('catalogue', 'category')
 
 
 def create_from_sequence(bits):

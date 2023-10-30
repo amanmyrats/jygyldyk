@@ -4,12 +4,18 @@ from django.views.generic.list import MultipleObjectMixin
 
 from core.loading import get_class, get_classes, get_model
 
-BrowseCategoryForm = get_class('search.forms', 'BrowseCategoryForm')
-SearchHandler, SearchResultsPaginationMixin = get_classes(
-    'search.search_handlers', ('SearchHandler', 'SearchResultsPaginationMixin'))
-is_solr_supported = get_class('search.features', 'is_solr_supported')
-is_elasticsearch_supported = get_class('search.features', 'is_elasticsearch_supported')
-Product = get_model('catalogue', 'Product')
+from webapps.search.forms import BrowseCategoryForm
+from webapps.search.search_handlers import SearchHandler, SearchResultsPaginationMixin
+from webapps.search.features import is_solr_supported, is_elasticsearch_supported
+
+from .models import Product
+
+# BrowseCategoryForm = get_class('search.forms', 'BrowseCategoryForm')
+# SearchHandler, SearchResultsPaginationMixin = get_classes(
+#     'search.search_handlers', ('SearchHandler', 'SearchResultsPaginationMixin'))
+# is_solr_supported = get_class('search.features', 'is_solr_supported')
+# is_elasticsearch_supported = get_class('search.features', 'is_elasticsearch_supported')
+# Product = get_model('catalogue', 'Product')
 
 
 def get_product_search_handler_class():

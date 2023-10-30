@@ -17,28 +17,18 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import SetPasswordForm
 from django.urls import path, reverse_lazy, include
-from django.apps import apps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
 from django.conf.urls.i18n import i18n_patterns
 
-from core.application import OscarConfig
-from core.loading import get_class
 from views.decorators import login_forbidden
 
+from webapps.customer.forms import PasswordResetForm
 
 
-catalogue_app = apps.get_app_config('catalogue')
-customer_app = apps.get_app_config('customer')
-basket_app = apps.get_app_config('basket')
-checkout_app = apps.get_app_config('checkout')
-search_app = apps.get_app_config('search')
-dashboard_app = apps.get_app_config('dashboard')
-offer_app = apps.get_app_config('offer')
-wishlists_app = apps.get_app_config('wishlists')
-
-password_reset_form = get_class('customer.forms', 'PasswordResetForm')
+# password_reset_form = get_class('customer.forms', 'PasswordResetForm')
+password_reset_form = PasswordResetForm
 set_password_form = SetPasswordForm
 
 urlpatterns = [
@@ -49,24 +39,12 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('', RedirectView.as_view(url=settings.HOMEPAGE), name='home'),
 
-    # API
-    # API
+    # WEBPAPPS
+    path('', include('webapps.urls')),
+
     # API
     path('api/v1/', include('api.urls')),
-    # API
-    # API
-    # API
-
-    path('catalogue/', catalogue_app.urls),
-    path('basket/', basket_app.urls),
-    path('checkout/', checkout_app.urls),
-    path('accounts/', customer_app.urls),
-    path('search/', search_app.urls),
-    path('dashboard/', dashboard_app.urls),
-    path('offers/', offer_app.urls),
-    path('wishlists/', wishlists_app.urls),
 
     # Password reset - as we're using Django's default view functions,
     # we can't namespace these urls as that prevents
@@ -99,4 +77,6 @@ urlpatterns += i18n_patterns(
             template_name='registration/password_reset_complete.html'
         )),
         name='password-reset-complete'),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

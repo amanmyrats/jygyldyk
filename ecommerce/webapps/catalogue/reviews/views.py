@@ -8,13 +8,17 @@ from webapps.catalogue.reviews.signals import review_added
 from core.loading import get_classes, get_model
 from core.utils import redirect_to_referrer
 
-ProductReviewForm, VoteForm, SortReviewsForm = get_classes(
-    'catalogue.reviews.forms',
-    ['ProductReviewForm', 'VoteForm', 'SortReviewsForm'])
+from .forms import ProductReviewForm, VoteForm, SortReviewsForm
+from .models import Vote, ProductReview
+from webapps.catalogue.models import Product
 
-Vote = get_model('reviews', 'vote')
-ProductReview = get_model('reviews', 'ProductReview')
-Product = get_model('catalogue', 'product')
+# ProductReviewForm, VoteForm, SortReviewsForm = get_classes(
+#     'catalogue.reviews.forms',
+#     ['ProductReviewForm', 'VoteForm', 'SortReviewsForm'])
+
+# Vote = get_model('reviews', 'vote')
+# ProductReview = get_model('reviews', 'ProductReview')
+# Product = get_model('catalogue', 'product')
 
 
 class CreateProductReview(CreateView):

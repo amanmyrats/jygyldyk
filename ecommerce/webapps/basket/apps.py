@@ -7,8 +7,8 @@ from core.application import OscarConfig
 from core.loading import get_class
 
 
-class BasketConfig(OscarConfig):
-# class BasketConfig(AppConfig):
+# class BasketConfig(OscarConfig):
+class BasketConfig(AppConfig):
     label = 'basket'
     name = 'webapps.basket'
     verbose_name = _('Basket')

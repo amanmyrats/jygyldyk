@@ -17,10 +17,15 @@ from core.utils import get_default_currency, round_half_up
 from custommodels.fields.slugfield import SlugField
 from templatetags.currency_filters import currency
 
-OfferApplications = get_class('offer.results', 'OfferApplications')
-Unavailable = get_class('partner.availability', 'Unavailable')
-LineOfferConsumer = get_class('basket.utils', 'LineOfferConsumer')
-OpenBasketManager, SavedBasketManager = get_classes('basket.managers', ['OpenBasketManager', 'SavedBasketManager'])
+from webapps.offer.results import OfferApplications
+from webapps.partner.availability import Unavailable
+from .utils import LineOfferConsumer
+from .managers import OpenBasketManager, SavedBasketManager
+
+# OfferApplications = get_class('offer.results', 'OfferApplications')
+# Unavailable = get_class('partner.availability', 'Unavailable')
+# LineOfferConsumer = get_class('basket.utils', 'LineOfferConsumer')
+# OpenBasketManager, SavedBasketManager = get_classes('basket.managers', ['OpenBasketManager', 'SavedBasketManager'])
 
 
 class AbstractBasket(models.Model):

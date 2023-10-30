@@ -2,12 +2,16 @@ from django.utils.translation import gettext_lazy as _
 
 from core.loading import get_class, get_model
 
-ReportGenerator = get_class('dashboard.reports.reports', 'ReportGenerator')
-ReportCSVFormatter = get_class('dashboard.reports.reports',
-                               'ReportCSVFormatter')
-ReportHTMLFormatter = get_class('dashboard.reports.reports',
-                                'ReportHTMLFormatter')
-Basket = get_model('basket', 'Basket')
+from webapps.dashboard.reports.reports import ReportGenerator, ReportCSVFormatter, ReportHTMLFormatter
+
+from .models import Basket
+
+# ReportGenerator = get_class('dashboard.reports.reports', 'ReportGenerator')
+# ReportCSVFormatter = get_class('dashboard.reports.reports',
+#                                'ReportCSVFormatter')
+# ReportHTMLFormatter = get_class('dashboard.reports.reports',
+#                                 'ReportHTMLFormatter')
+# Basket = get_model('basket', 'Basket')
 
 
 class OpenBasketReportCSVFormatter(ReportCSVFormatter):

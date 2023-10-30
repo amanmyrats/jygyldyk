@@ -2,8 +2,10 @@ from django.contrib import admin
 
 from core.loading import get_model
 
-ProductReview = get_model('reviews', 'ProductReview')
-Vote = get_model('reviews', 'Vote')
+from .models import ProductReview, Vote
+
+# ProductReview = get_model('reviews', 'ProductReview')
+# Vote = get_model('reviews', 'Vote')
 
 
 class ProductReviewAdmin(admin.ModelAdmin):

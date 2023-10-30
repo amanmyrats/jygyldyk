@@ -15,8 +15,10 @@ from webapps.catalogue.exceptions import (
     IdenticalImageError, ImageImportError, InvalidImageArchive)
 from core.loading import get_model
 
-Product = get_model('catalogue', 'product')
-ProductImage = get_model('catalogue', 'productimage')
+from .models import Product, ProductImage
+
+# Product = get_model('catalogue', 'product')
+# ProductImage = get_model('catalogue', 'productimage')
 
 
 # This is an old class only really intended to be used by the internal sandbox

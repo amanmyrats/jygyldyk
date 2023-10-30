@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from core.loading import get_model
+from .models import ProductRecord, UserRecord, UserSearch, UserProductView
 
 
 class ProductRecordAdmin(admin.ModelAdmin):
@@ -17,9 +18,7 @@ class UserRecordAdmin(admin.ModelAdmin):
                     'num_orders', 'total_spent', 'date_last_order')
 
 
-admin.site.register(get_model('analytics', 'productrecord'),
-                    ProductRecordAdmin)
-admin.site.register(get_model('analytics', 'userrecord'), UserRecordAdmin)
-admin.site.register(get_model('analytics', 'usersearch'))
-admin.site.register(get_model('analytics', 'userproductview'),
-                    UserProductViewAdmin)
+admin.site.register(ProductRecord, ProductRecordAdmin)
+admin.site.register(UserRecord, UserRecordAdmin)
+admin.site.register(UserSearch)
+admin.site.register(UserProductView, UserProductViewAdmin)

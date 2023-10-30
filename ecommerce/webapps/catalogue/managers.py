@@ -93,7 +93,9 @@ class ProductQuerySet(models.query.QuerySet):
         Applies select_related and prefetch_related for commonly related
         models to save on queries
         """
-        Option = get_model('catalogue', 'Option')
+        # Option = get_model('catalogue', 'Option')
+        from .models import Option
+        Option = Option
         product_class_options = Option.objects.filter(productclass=OuterRef('product_class'))
         product_options = Option.objects.filter(product=OuterRef('pk'))
         return self.select_related('product_class')\

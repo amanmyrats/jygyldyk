@@ -1,6 +1,8 @@
 from core.loading import get_model
 
-Notification = get_model('communication', 'Notification')
+from webapps.communication.models import Notification
+
+# Notification = get_model('communication', 'Notification')
 
 
 def notifications(request):

@@ -10,10 +10,12 @@ from webapps.order.signals import order_placed
 from webapps.search.signals import user_search
 from core.loading import get_model
 
-ProductRecord = get_model('analytics', 'ProductRecord')
-UserProductView = get_model('analytics', 'UserProductView')
-UserRecord = get_model('analytics', 'UserRecord')
-UserSearch = get_model('analytics', 'UserSearch')
+from .models import ProductRecord, UserProductView, UserRecord, UserSearch
+
+# ProductRecord = get_model('analytics', 'ProductRecord')
+# UserProductView = get_model('analytics', 'UserProductView')
+# UserRecord = get_model('analytics', 'UserRecord')
+# UserSearch = get_model('analytics', 'UserSearch')
 
 # Helpers
 

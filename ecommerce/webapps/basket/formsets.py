@@ -3,8 +3,11 @@ from django.utils.functional import cached_property
 
 from core.loading import get_classes, get_model
 
-Line = get_model('basket', 'line')
-BasketLineForm, SavedLineForm = get_classes('basket.forms', ['BasketLineForm', 'SavedLineForm'])
+from .models import Line
+from .forms import BasketLineForm, SavedLineForm
+
+# Line = get_model('basket', 'line')
+# BasketLineForm, SavedLineForm = get_classes('basket.forms', ['BasketLineForm', 'SavedLineForm'])
 
 
 class BaseBasketLineFormSet(BaseModelFormSet):

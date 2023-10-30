@@ -6,9 +6,11 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 
 from core.loading import get_model
 
-CommunicationEventType = get_model('communication', 'CommunicationEventType')
-Email = get_model('communication', 'Email')
-Notification = get_model('communication', 'Notification')
+from .models import CommunicationEventType, Email, Notification
+
+# CommunicationEventType = get_model('communication', 'CommunicationEventType')
+# Email = get_model('communication', 'Email')
+# Notification = get_model('communication', 'Notification')
 
 
 class Dispatcher(object):

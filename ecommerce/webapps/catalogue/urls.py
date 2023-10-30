@@ -28,6 +28,7 @@ catalogue_view = CatalogueView
 category_view = ProductCategoryView
 range_view = RangeDetailView
 
+app_name = 'catalogue'
 
 urlpatterns = [
     path('', catalogue_view.as_view(), name='index'),

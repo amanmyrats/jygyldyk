@@ -5,7 +5,9 @@ from django.dispatch import receiver
 
 from core.loading import get_model
 
-Category = get_model("catalogue", "Category")
+from .models import Category
+
+# Category = get_model("catalogue", "Category")
 
 
 if settings.DELETE_IMAGE_FILES:

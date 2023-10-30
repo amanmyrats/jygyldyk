@@ -11,6 +11,8 @@ add_view = BasketAddView
 add_voucher_view = VoucherAddView
 remove_voucher_view = VoucherRemoveView
 
+app_name = 'basket'
+
 urlpatterns = [
     path('', summary_view.as_view(), name='summary'),
     path('add/<int:pk>/', add_view.as_view(), name='add'),

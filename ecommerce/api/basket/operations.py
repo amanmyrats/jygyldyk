@@ -100,7 +100,7 @@ def get_user_basket(user):
 
 
 def store_basket_in_session(basket, session):
-    session[settings.OSCAR_BASKET_COOKIE_OPEN] = basket.pk
+    session[settings.BASKET_COOKIE_OPEN] = basket.pk
     session.save()
 
 

@@ -31,10 +31,13 @@ from custommodels.fields import AutoSlugField, NullCharField
 from custommodels.fields.slugfield import SlugField
 from utils.models import get_image_upload_path
 
-CategoryQuerySet, ProductQuerySet = get_classes(
-    'catalogue.managers', ['CategoryQuerySet', 'ProductQuerySet'])
-ProductAttributesContainer = get_class(
-    'catalogue.product_attributes', 'ProductAttributesContainer')
+from .managers import CategoryQuerySet, ProductQuerySet
+from .product_attributes import ProductAttributesContainer
+
+# CategoryQuerySet, ProductQuerySet = get_classes(
+#     'catalogue.managers', ['CategoryQuerySet', 'ProductQuerySet'])
+# ProductAttributesContainer = get_class(
+#     'catalogue.product_attributes', 'ProductAttributesContainer')
 
 
 class ReverseStartsWith(StartsWith):

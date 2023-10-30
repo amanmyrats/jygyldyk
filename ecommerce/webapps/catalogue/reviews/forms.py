@@ -3,8 +3,10 @@ from django.utils.translation import gettext_lazy as _
 
 from core.loading import get_model
 
-Vote = get_model('reviews', 'vote')
-ProductReview = get_model('reviews', 'productreview')
+from .models import Vote, ProductReview
+
+# Vote = get_model('reviews', 'vote')
+# ProductReview = get_model('reviews', 'productreview')
 
 
 class ProductReviewForm(forms.ModelForm):

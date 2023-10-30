@@ -10,7 +10,7 @@ create_view = CreateProductReview
 vote_view = AddVoteView
 list_view = ProductReviewList
 
-urlpatters = [
+urlpatterns = [
     path('<int:pk>/', detail_view.as_view(), name='reviews-detail'),
     path('add/', create_view.as_view(), name='reviews-add'),
     path('<int:pk>)/vote/', login_required(vote_view.as_view()), name='reviews-vote'),

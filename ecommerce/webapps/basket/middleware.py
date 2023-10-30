@@ -6,9 +6,13 @@ from django.utils.translation import gettext_lazy as _
 
 from core.loading import get_class, get_model
 
-Applicator = get_class('offer.applicator', 'Applicator')
-Basket = get_model('basket', 'basket')
-Selector = get_class('partner.strategy', 'Selector')
+from webapps.offer.applicator import Applicator
+from webapps.partner.strategy import Selector
+from .models import Basket
+
+# Applicator = get_class('offer.applicator', 'Applicator')
+# Basket = get_model('basket', 'basket')
+# Selector = get_class('partner.strategy', 'Selector')
 
 selector = Selector()
 

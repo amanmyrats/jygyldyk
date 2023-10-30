@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from core.loading import get_model
 
+from .models import UserAddress, Country
+
 
 class UserAddressAdmin(admin.ModelAdmin):
     readonly_fields = ('num_orders_as_billing_address', 'num_orders_as_shipping_address')
@@ -23,5 +25,7 @@ class CountryAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(get_model('address', 'useraddress'), UserAddressAdmin)
-admin.site.register(get_model('address', 'country'), CountryAdmin)
+# admin.site.register(get_model('address', 'useraddress'), UserAddressAdmin)
+# admin.site.register(get_model('address', 'country'), CountryAdmin)
+admin.site.register(UserAddress, UserAddressAdmin)
+admin.site.register(Country, CountryAdmin)

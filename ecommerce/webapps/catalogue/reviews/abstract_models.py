@@ -10,7 +10,9 @@ from core import validators
 from core.compat import AUTH_USER_MODEL
 from core.loading import get_class
 
-ProductReviewQuerySet = get_class('catalogue.reviews.managers', 'ProductReviewQuerySet')
+from .managers import ProductReviewQuerySet
+
+# ProductReviewQuerySet = get_class('catalogue.reviews.managers', 'ProductReviewQuerySet')
 
 
 class AbstractProductReview(models.Model):

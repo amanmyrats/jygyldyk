@@ -4,17 +4,23 @@ from treebeard.forms import movenodeform_factory
 
 from core.loading import get_model
 
-AttributeOption = get_model('catalogue', 'AttributeOption')
-AttributeOptionGroup = get_model('catalogue', 'AttributeOptionGroup')
-Category = get_model('catalogue', 'Category')
-Option = get_model('catalogue', 'Option')
-Product = get_model('catalogue', 'Product')
-ProductAttribute = get_model('catalogue', 'ProductAttribute')
-ProductAttributeValue = get_model('catalogue', 'ProductAttributeValue')
-ProductCategory = get_model('catalogue', 'ProductCategory')
-ProductClass = get_model('catalogue', 'ProductClass')
-ProductImage = get_model('catalogue', 'ProductImage')
-ProductRecommendation = get_model('catalogue', 'ProductRecommendation')
+from .models import (
+    AttributeOption, AttributeOptionGroup, Category, Option, 
+    Product, ProductAttribute, ProductAttributeValue, ProductCategory, 
+    ProductClass, ProductImage, ProductRecommendation
+)
+
+# AttributeOption = get_model('catalogue', 'AttributeOption')
+# AttributeOptionGroup = get_model('catalogue', 'AttributeOptionGroup')
+# Category = get_model('catalogue', 'Category')
+# Option = get_model('catalogue', 'Option')
+# Product = get_model('catalogue', 'Product')
+# ProductAttribute = get_model('catalogue', 'ProductAttribute')
+# ProductAttributeValue = get_model('catalogue', 'ProductAttributeValue')
+# ProductCategory = get_model('catalogue', 'ProductCategory')
+# ProductClass = get_model('catalogue', 'ProductClass')
+# ProductImage = get_model('catalogue', 'ProductImage')
+# ProductRecommendation = get_model('catalogue', 'ProductRecommendation')
 
 
 class AttributeInline(admin.TabularInline):

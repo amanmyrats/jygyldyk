@@ -4,8 +4,10 @@ from django.utils.translation import gettext_lazy as _
 from core.loading import get_class
 from customforms.widgets import DatePickerInput
 
-GeneratorRepository = get_class('dashboard.reports.utils',
-                                'GeneratorRepository')
+from webapps.dashboard.reports.utils import GeneratorRepository
+
+# GeneratorRepository = get_class('dashboard.reports.utils',
+#                                 'GeneratorRepository')
 
 
 class ReportForm(forms.Form):

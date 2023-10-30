@@ -13,7 +13,9 @@ class ReportsDashboardConfig(OscarDashboardConfig):
     default_permissions = ['is_staff', ]
 
     def ready(self):
-        self.index_view = get_class('dashboard.reports.views', 'IndexView')
+        from webapps.dashboard.reports.views import IndexView
+        # self.index_view = get_class('dashboard.reports.views', 'IndexView')
+        self.index_view = IndexView
 
     def get_urls(self):
         urls = [

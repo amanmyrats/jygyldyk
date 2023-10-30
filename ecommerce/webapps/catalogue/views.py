@@ -7,15 +7,20 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, TemplateView
 
-from webapps.catalogue.signals import product_viewed
 from core.loading import get_class, get_model
+from webapps.catalogue.signals import product_viewed
+from webapps.customer.models import ProductAlert
+from webapps.customer.forms import ProductAlertForm
 
-Product = get_model('catalogue', 'product')
-Category = get_model('catalogue', 'category')
-ProductAlert = get_model('customer', 'ProductAlert')
-ProductAlertForm = get_class('customer.forms', 'ProductAlertForm')
-get_product_search_handler_class = get_class(
-    'catalogue.search_handlers', 'get_product_search_handler_class')
+from .models import Product, Category
+from .search_handlers import get_product_search_handler_class
+
+# Product = get_model('catalogue', 'product')
+# Category = get_model('catalogue', 'category')
+# ProductAlert = get_model('customer', 'ProductAlert')
+# ProductAlertForm = get_class('customer.forms', 'ProductAlertForm')
+# get_product_search_handler_class = get_class(
+#     'catalogue.search_handlers', 'get_product_search_handler_class')
 
 
 class ProductDetailView(DetailView):

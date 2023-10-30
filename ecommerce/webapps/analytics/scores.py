@@ -2,7 +2,9 @@ from django.db.models import F
 
 from core.loading import get_model
 
-ProductRecord = get_model('analytics', 'ProductRecord')
+from .models import ProductRecord
+
+# ProductRecord = get_model('analytics', 'ProductRecord')
 
 
 class Calculator(object):

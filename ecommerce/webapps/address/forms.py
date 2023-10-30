@@ -4,7 +4,9 @@ from django.conf import settings
 from core.loading import get_model
 from customforms.mixins import PhoneNumberMixin
 
-UserAddress = get_model('address', 'useraddress')
+from .models import UserAddress
+
+# UserAddress = get_model('address', 'useraddress')
 
 
 class AbstractAddressForm(forms.ModelForm):

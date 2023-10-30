@@ -2,13 +2,19 @@ from django.utils.translation import gettext_lazy as _
 
 from core.loading import get_class, get_model
 
-ReportGenerator = get_class('dashboard.reports.reports', 'ReportGenerator')
-ReportCSVFormatter = get_class('dashboard.reports.reports',
-                               'ReportCSVFormatter')
-ReportHTMLFormatter = get_class('dashboard.reports.reports',
-                                'ReportHTMLFormatter')
-ProductRecord = get_model('analytics', 'ProductRecord')
-UserRecord = get_model('analytics', 'UserRecord')
+from webapps.dashboard.reports.reports import (
+    ReportGenerator, ReportCSVFormatter, ReportHTMLFormatter
+)
+
+from .models import ProductRecord, UserRecord
+
+# ReportGenerator = get_class('dashboard.reports.reports', 'ReportGenerator')
+# ReportCSVFormatter = get_class('dashboard.reports.reports',
+#                                'ReportCSVFormatter')
+# ReportHTMLFormatter = get_class('dashboard.reports.reports',
+#                                 'ReportHTMLFormatter')
+# ProductRecord = get_model('analytics', 'ProductRecord')
+# UserRecord = get_model('analytics', 'UserRecord')
 
 
 class ProductReportCSVFormatter(ReportCSVFormatter):

@@ -2,7 +2,9 @@ from django.contrib import admin
 
 from core.loading import get_model
 
-Line = get_model('basket', 'line')
+from .models import Line, Basket, LineAttribute
+
+# Line = get_model('basket', 'line')
 
 
 class LineInline(admin.TabularInline):
@@ -27,6 +29,8 @@ class BasketAdmin(admin.ModelAdmin):
     inlines = [LineInline]
 
 
-admin.site.register(get_model('basket', 'basket'), BasketAdmin)
+# admin.site.register(get_model('basket', 'basket'), BasketAdmin)
+admin.site.register(Basket, BasketAdmin)
 admin.site.register(Line, LineAdmin)
-admin.site.register(get_model('basket', 'LineAttribute'))
+# admin.site.register(get_model('basket', 'LineAttribute'))
+admin.site.register(LineAttribute)
