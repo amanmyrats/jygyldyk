@@ -57,5 +57,4 @@ class ShippingDashboardConfig(OscarDashboardConfig):
                 self.weight_band_delete_view.as_view(),
                 name='shipping-method-band-delete'),
         ]
-        get_class(
-'dashboard.shipping.views', 'WeightBandDeleteView')
+        return self.post_process_urls(urlpatterns)

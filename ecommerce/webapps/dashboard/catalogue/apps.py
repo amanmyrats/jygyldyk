@@ -23,7 +23,7 @@ class CatalogueDashboardConfig(OscarDashboardConfig):
     }
 
     def ready(self):
-        from.views import (
+        from webapps.dashboard.catalogue.views import (
             ProductListView, ProductLookupView, ProductCreateRedirectView, ProductCreateUpdateView, 
             ProductDeleteView, ProductClassCreateView, ProductClassUpdateView, ProductClassListView, 
             ProductClassDeleteView, 

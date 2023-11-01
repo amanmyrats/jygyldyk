@@ -17,7 +17,7 @@ class DashboardConfig(OscarDashboardConfig):
     }
 
     def ready(self):
-        from .views import IndexView, LoginView
+        from webapps.dashboard.views import IndexView, LoginView
 
         self.index_view = IndexView
         self.login_view = LoginView

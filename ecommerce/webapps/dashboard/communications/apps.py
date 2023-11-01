@@ -13,7 +13,7 @@ class CommunicationsDashboardConfig(OscarDashboardConfig):
     default_permissions = ['is_staff', ]
 
     def ready(self):
-        from .views import ListView, UpdateView
+        from webapps.dashboard.communications.views import ListView, UpdateView
         
         self.list_view = ListView
         self.update_view = UpdateView
