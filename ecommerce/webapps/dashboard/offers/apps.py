@@ -13,14 +13,19 @@ class OffersDashboardConfig(OscarDashboardConfig):
     default_permissions = ['is_staff', ]
 
     def ready(self):
-        self.list_view = get_class('dashboard.offers.views', 'OfferListView')
-        self.metadata_view = get_class('dashboard.offers.views', 'OfferMetaDataView')
-        self.condition_view = get_class('dashboard.offers.views', 'OfferConditionView')
-        self.benefit_view = get_class('dashboard.offers.views', 'OfferBenefitView')
-        self.restrictions_view = get_class('dashboard.offers.views',
-                                           'OfferRestrictionsView')
-        self.delete_view = get_class('dashboard.offers.views', 'OfferDeleteView')
-        self.detail_view = get_class('dashboard.offers.views', 'OfferDetailView')
+        from .views import (
+            OfferListView, OfferMetaDataView, OfferConditionView, 
+            OfferBenefitView, OfferRestrictionsView, 
+            OfferDeleteView, OfferDetailView
+        )
+
+        self.list_view = OfferListView
+        self.metadata_view = OfferMetaDataView
+        self.condition_view = OfferConditionView
+        self.benefit_view = OfferBenefitView
+        self.restrictions_view = OfferRestrictionsView
+        self.delete_view = OfferDeleteView
+        self.detail_view = OfferDetailView
 
     def get_urls(self):
         urls = [

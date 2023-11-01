@@ -21,12 +21,16 @@ class OrdersDashboardConfig(OscarDashboardConfig):
     }
 
     def ready(self):
-        self.order_list_view = get_class('dashboard.orders.views', 'OrderListView')
-        self.order_detail_view = get_class('dashboard.orders.views', 'OrderDetailView')
-        self.shipping_address_view = get_class('dashboard.orders.views',
-                                               'ShippingAddressUpdateView')
-        self.line_detail_view = get_class('dashboard.orders.views', 'LineDetailView')
-        self.order_stats_view = get_class('dashboard.orders.views', 'OrderStatsView')
+        from .views import (
+            OrderListView, OrderDetailView, ShippingAddressUpdateView, 
+            LineDetailView, OrderStatsView
+        )
+        
+        self.order_list_view = OrderListView
+        self.order_detail_view = OrderDetailView
+        self.shipping_address_view = ShippingAddressUpdateView
+        self.line_detail_view = LineDetailView
+        self.order_stats_view = OrderStatsView
 
     def get_urls(self):
         urls = [

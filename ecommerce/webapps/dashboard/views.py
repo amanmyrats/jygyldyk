@@ -15,14 +15,22 @@ from django.views.generic import TemplateView
 from core.compat import get_user_model
 from core.loading import get_class, get_model
 
-RelatedFieldWidgetWrapper = get_class('dashboard.widgets', 'RelatedFieldWidgetWrapper')
-ConditionalOffer = get_model('offer', 'ConditionalOffer')
-Voucher = get_model('voucher', 'Voucher')
-Basket = get_model('basket', 'Basket')
-StockAlert = get_model('partner', 'StockAlert')
-Product = get_model('catalogue', 'Product')
-Order = get_model('order', 'Order')
-Line = get_model('order', 'Line')
+from .widgets import RelatedFieldWidgetWrapper
+from webapps.offer.models import ConditionalOffer
+from webapps.voucher.models import Voucher
+from webapps.basket.models import Basket
+from webapps.partner.models import StockAlert
+from webapps.catalogue.models import Product
+from webapps.order.models import Order, Line
+
+RelatedFieldWidgetWrapper = RelatedFieldWidgetWrapper
+ConditionalOffer = ConditionalOffer
+Voucher = Voucher
+Basket = Basket
+StockAlert = StockAlert
+Product = Product
+Order = Order
+Line = Line
 User = get_user_model()
 
 

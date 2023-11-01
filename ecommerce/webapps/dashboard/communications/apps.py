@@ -13,8 +13,10 @@ class CommunicationsDashboardConfig(OscarDashboardConfig):
     default_permissions = ['is_staff', ]
 
     def ready(self):
-        self.list_view = get_class('dashboard.communications.views', 'ListView')
-        self.update_view = get_class('dashboard.communications.views', 'UpdateView')
+        from .views import ListView, UpdateView
+        
+        self.list_view = ListView
+        self.update_view = UpdateView
 
     def get_urls(self):
         urls = [

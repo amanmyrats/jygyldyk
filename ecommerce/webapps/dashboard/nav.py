@@ -67,11 +67,16 @@ def _dashboard_url_names_to_config():
         if isinstance(config, OscarDashboardConfig)
     )
     urls_to_config = {}
+    # print('dashboard_configs', dashboard_configs)
     for config in dashboard_configs:
+        # print('config', config)
+        # url_patterns = get_resolver().url_patterns
         for url in config.urls[0]:
+            # print('url', url)
             # includes() don't have a name attribute
             # We skipped them because they come from other AppConfigs
             name = getattr(url, 'name', None)
+            # print('name', name)
             if not name:
                 continue
 
@@ -94,6 +99,11 @@ def default_access_fn(user, url_name, url_args=None, url_kwargs=None):
     Once the permissions for the view are known, the access logic used
     by the dashboard decorator is evaluated
     """
+    # print(user)
+    # print(url_name)
+    # print(url_args)
+    # print(url_kwargs)
+    # print()
     if url_name is None:  # it's a heading
         return True
 
@@ -103,5 +113,6 @@ def default_access_fn(user, url_name, url_args=None, url_kwargs=None):
     app_config_instance = _dashboard_url_names_to_config()[url_name]
 
     permissions = app_config_instance.get_permissions(url_name)
+    # permissions = []
 
     return check_permissions(user, permissions)

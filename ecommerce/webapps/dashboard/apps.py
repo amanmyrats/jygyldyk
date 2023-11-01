@@ -17,8 +17,10 @@ class DashboardConfig(OscarDashboardConfig):
     }
 
     def ready(self):
-        self.index_view = get_class('dashboard.views', 'IndexView')
-        self.login_view = get_class('dashboard.views', 'LoginView')
+        from .views import IndexView, LoginView
+
+        self.index_view = IndexView
+        self.login_view = LoginView
 
         self.catalogue_app = apps.get_app_config('catalogue_dashboard')
         self.reports_app = apps.get_app_config('reports_dashboard')
